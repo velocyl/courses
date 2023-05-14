@@ -1,3 +1,7 @@
+function SetFocusById(id) {
+    document.getElementById(id).focus();
+}
+
 // Load the data from the JSON file
 const data = await new Promise((resolve, reject) => {
     fetch("./data/source.json")
@@ -38,6 +42,20 @@ const thirdLetter3 = document.getElementById("thirdLetter3");
 // hide the tables we don't need
 wordTable2.style.display = "none";
 wordTable3.style.display = "none";
+
+function ClearInput() {
+    firstLetter1.value = "";
+    secondLetter1.value = "";
+    thirdLetter1.value = "";
+
+    firstLetter2.value = "";
+    secondLetter2.value = "";
+    thirdLetter2.value = "";
+
+    firstLetter3.value = "";
+    secondLetter3.value = "";
+    thirdLetter3.value = "";
+}
 
 function SubmitResponse() {
     let firstLetter = "";
@@ -83,6 +101,7 @@ function SubmitResponse() {
 
         // prompt to reload the page
         if (confirm("Play again?")) {
+            ClearInput();
             location.reload();
         }
 
@@ -124,6 +143,7 @@ function SubmitResponse() {
 
         // prompt to reload the page
         if (confirm("Play again?")) {
+            ClearInput();
             location.reload();
         }
     }
@@ -131,6 +151,8 @@ function SubmitResponse() {
     // show the next table
     currentTable.nextElementSibling.style.display = "block";
 }
+
+SetFocusById("firstLetter1");
 
 // We're loaded! Say hello!
 console.log("Hello from app.js!");
