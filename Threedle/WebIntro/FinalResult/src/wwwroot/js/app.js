@@ -1,3 +1,7 @@
+function SetFocusById(id) {
+    document.getElementById(id).focus();
+}
+
 // Load the data from the JSON file
 const data = await new Promise((resolve, reject) => {
     fetch("./data/source.json")
@@ -10,6 +14,10 @@ const data = await new Promise((resolve, reject) => {
 // Set up button event listener
 const submitButton = document.getElementById("submitButton");
 submitButton.addEventListener("click", SubmitResponse);
+
+// Set up reset button event listener
+const resetButton = document.getElementById("resetButton");
+resetButton.addEventListener("click", ResetGame);
 
 // Select random word from the data
 let randomizedWordFromData = data[Math.floor(Math.random() * data.length)];
@@ -38,6 +46,25 @@ const thirdLetter3 = document.getElementById("thirdLetter3");
 // hide the tables we don't need
 wordTable2.style.display = "none";
 wordTable3.style.display = "none";
+
+function ClearInput() {
+    firstLetter1.value = "";
+    secondLetter1.value = "";
+    thirdLetter1.value = "";
+
+    firstLetter2.value = "";
+    secondLetter2.value = "";
+    thirdLetter2.value = "";
+
+    firstLetter3.value = "";
+    secondLetter3.value = "";
+    thirdLetter3.value = "";
+}
+
+function ResetGame(){
+    ClearInput();
+    location.reload();
+}
 
 function SubmitResponse() {
     let firstLetter = "";
@@ -70,24 +97,6 @@ function SubmitResponse() {
             break;
     }
 
-    // assemble the word
-    let word = firstLetter + secondLetter + thirdLetter;
-
-    // set it lowercase
-    word = word.toLowerCase();
-
-    // first check if the word is correct
-    if (word === randomWord) {
-        console.log("Correct!");
-        alert("Correct!");
-
-        // prompt to reload the page
-        if (confirm("Play again?")) {
-            location.reload();
-        }
-
-    }
-
     // check if any of the letters are correct and in the right place
     if (firstLetter === randomWord[0]) {
         currentTable.rows[0].cells[0].style.backgroundColor = "green";
@@ -114,23 +123,37 @@ function SubmitResponse() {
         currentTable.rows[0].cells[2].style.backgroundColor = "yellow";
     }
 
+    // assemble the word
+    let word = firstLetter + secondLetter + thirdLetter;
+
+    // set it lowercase
+    word = word.toLowerCase();
+
+    // first check if the word is correct
+    if (word === randomWord) {
+        console.log("Correct!");
+
+        // set statusMessage to "Correct!"
+        document.getElementById("statusMessage").innerHTML = "Correct!";
+
+    }
+
     // increment the failed attempts
     failedAttempts++;
 
     // if we've had 3 failed attempts, we've lost
     if (failedAttempts === 3) {
         console.log("You lost!");
-        alert("You lost!");
-
-        // prompt to reload the page
-        if (confirm("Play again?")) {
-            location.reload();
-        }
+        
+        // set statusMessage to "You lost!"
+        document.getElementById("statusMessage").innerHTML = "You lost!";
     }
 
     // show the next table
     currentTable.nextElementSibling.style.display = "block";
 }
+
+SetFocusById("firstLetter1");
 
 // We're loaded! Say hello!
 console.log("Hello from app.js!");
