@@ -1,5 +1,9 @@
 # Threedle - A fun word game built for the web using Javascript.
 
+## Description
+
+Join us on an exciting journey into the world of web programming as you learn to build your very own version of the popular Wordle game! In this interactive course, you'll delve into the fundamentals of HTML, CSS, and JavaScript, regardless of your previous coding experience. Unleash your creativity, develop problem-solving skills, and join the world of coding.
+
 ## What we learn
 
 The minimal code for a word game on the web:
@@ -26,8 +30,8 @@ Stretch
 - Lay out our Threedle grid using a table element
 
 Learn more items
-- Variables in javascript (var, let, const)
-- Understanding JSON (javascript object notation)
+- Variables in JavaScript (var, let, const)
+- Understanding JSON (JavaScript object notation)
 - Using the browser fetch api to load data
 - Promises
 
